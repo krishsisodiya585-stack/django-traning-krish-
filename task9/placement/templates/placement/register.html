@@ -1,0 +1,32 @@
+{% extends 'placement/base.html' %}
+{% block title %}Student Registration | Northstar{% endblock %}
+{% block content %}
+<section class="form-page">
+    <div class="form-aside aside-register">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> START HERE</p>
+        <h1>Your next chapter<br>starts with a profile.</h1>
+        <p>Set up your student account to get a personal placement outlook.</p>
+        <div class="aside-index"><span>01</span><span class="index-line"></span><span>STUDENT PROFILE</span></div>
+    </div>
+    <div class="form-panel">
+        <div class="panel-heading"><span class="panel-kicker">NEW STUDENT</span><span class="panel-count">01 / 02</span>
+        </div>
+        <h2>Student registration</h2>
+        <p class="panel-intro">Enter your details to create your account.</p>
+        <form method="post" class="form-fields">
+            {% csrf_token %}
+            <label>Student ID<input name="student_id" type="text" maxlength="30" placeholder="e.g. STU-2026-014"
+                    autocomplete="username" required></label>
+            <label>Student name<input name="name" type="text" maxlength="120" placeholder="Your full name"
+                    autocomplete="name" required></label>
+            <label>Password<input name="password" type="password" placeholder="Create a password"
+                    autocomplete="new-password" required></label>
+            <label>Email address<input name="email" type="email" maxlength="254" placeholder="you@example.com"
+                    autocomplete="email" required></label>
+            <button class="button button-dark button-full" type="submit">Create account <span
+                    aria-hidden="true">↗</span></button>
+        </form>
+        <p class="form-switch">Already registered? <a href="{% url 'login' %}">Log in</a></p>
+    </div>
+</section>
+{% endblock %}

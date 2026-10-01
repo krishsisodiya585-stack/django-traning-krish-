@@ -1,0 +1,24 @@
+{% extends 'testing/base.html' %}
+{% block title %}Create account | Checkmate{% endblock %}
+{% block content %}
+<section class="auth-page auth-page-wide">
+    <p class="eyebrow">START YOUR ACCOUNT</p>
+    <h1>A fresh start.</h1>
+    <p class="panel-note">Set up your student profile to begin.</p>
+    <form method="post" class="form-stack">
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+        {% for field in form %}
+        <div class="form-field{% if field.name == 'terms' %} form-field-check{% endif %}">
+            {% if field.name == 'terms' %}{{ field }}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{%
+            else %}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% endif %}
+            {% if field.help_text %}<div class="help-text">{{ field.help_text|safe }}</div>{% endif %}
+            {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        </div>
+        {% endfor %}
+        <button class="button button-primary button-full" type="submit">Create account <span
+                aria-hidden="true">→</span></button>
+    </form>
+    <p class="switch-auth">Already registered? <a href="{% url 'login' %}">Log in</a></p>
+</section>
+{% endblock %}

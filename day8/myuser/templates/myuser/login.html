@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign in</title>
+    <style>
+        :root {
+            --ink: #19352f;
+            --muted: #647771;
+            --paper: #f5f6ef;
+            --green: #176b52;
+            --line: #dce4dc;
+            --error: #a32f38;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        aside {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: clamp(32px, 6vw, 82px);
+            color: #f8f7ec;
+            background: linear-gradient(145deg, #1d5948, #173f39);
+        }
+
+        aside strong {
+            font: 700 15px "Trebuchet MS", sans-serif;
+        }
+
+        aside h1 {
+            max-width: 480px;
+            margin: 0 0 18px;
+            font-size: clamp(40px, 5vw, 66px);
+            font-weight: 400;
+            line-height: 1.03;
+        }
+
+        aside p {
+            max-width: 360px;
+            color: #d0e1d7;
+            font: 16px/1.7 "Trebuchet MS", sans-serif;
+        }
+
+        aside small {
+            color: #c4d8cd;
+            font: 12px "Trebuchet MS", sans-serif;
+        }
+
+        main {
+            display: grid;
+            place-items: center;
+            padding: 36px 24px;
+        }
+
+        section {
+            width: min(100%, 420px);
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: var(--green);
+            font: 700 12px "Trebuchet MS", sans-serif;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 34px;
+            font-weight: 400;
+        }
+
+        .intro {
+            margin: 10px 0 28px;
+            color: var(--muted);
+            font: 14px/1.6 "Trebuchet MS", sans-serif;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font: 600 13px "Trebuchet MS", sans-serif;
+        }
+
+        input {
+            width: 100%;
+            min-height: 46px;
+            padding: 11px 13px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            background: #fffefa;
+            color: var(--ink);
+            font: 15px "Trebuchet MS", sans-serif;
+        }
+
+        input:focus {
+            outline: 2px solid #85bda1;
+            outline-offset: 1px;
+            border-color: var(--green);
+        }
+
+        .error {
+            margin: 6px 0 0;
+            color: var(--error);
+            font: 12px/1.5 "Trebuchet MS", sans-serif;
+        }
+
+        .alert {
+            margin-bottom: 18px;
+            padding: 11px 13px;
+            border-left: 3px solid var(--error);
+            background: #fff0ee;
+            color: var(--error);
+            font: 13px/1.5 "Trebuchet MS", sans-serif;
+        }
+
+        button {
+            width: 100%;
+            min-height: 48px;
+            margin-top: 3px;
+            border: 0;
+            border-radius: 4px;
+            background: var(--green);
+            color: white;
+            cursor: pointer;
+            font: 700 14px "Trebuchet MS", sans-serif;
+        }
+
+        button:hover {
+            background: #10513e;
+        }
+
+        .signup {
+            margin-top: 22px;
+            text-align: center;
+            color: var(--muted);
+            font: 13px "Trebuchet MS", sans-serif;
+        }
+
+        a {
+            color: var(--green);
+            font-weight: 700;
+            text-underline-offset: 3px;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                min-height: 210px;
+                padding: 24px;
+            }
+
+            aside h1 {
+                margin: 28px 0 8px;
+                font-size: 40px;
+            }
+
+            aside p {
+                margin: 0;
+                font-size: 14px;
+            }
+
+            aside small {
+                display: none;
+            }
+
+            main {
+                padding: 34px 24px 42px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside>
+        <strong>DAY EIGHT</strong>
+        <div>
+            <h1>Welcome back.</h1>
+            <p>Sign in with the username and password you chose.</p>
+        </div>
+        <small>Good to have you here.</small>
+    </aside>
+    <main>
+        <section aria-labelledby="form-title">
+            <p class="eyebrow">Your account</p>
+            <h2 id="form-title">Sign in</h2>
+            <p class="intro">Enter your account details to continue.</p>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                <div class="alert" role="alert">{{ form.non_field_errors }}</div>
+                {% endif %}
+                {% for field in form %}
+                <div class="field">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}<p class="error" role="alert">{{ error }}</p>{% endfor %}
+                </div>
+                {% endfor %}
+                <button type="submit">Sign in</button>
+            </form>
+            <p class="signup">New here? <a href="{% url 'sign_up' %}">Create an account</a></p>
+        </section>
+    </main>
+</body>
+
+</html>

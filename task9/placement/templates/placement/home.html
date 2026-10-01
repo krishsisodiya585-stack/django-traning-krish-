@@ -1,0 +1,68 @@
+{% extends 'placement/base.html' %}
+{% block title %}Student Placement | Northstar{% endblock %}
+{% block content %}
+<section class="hero-shell">
+    <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> YOUR CAREER, IN FOCUS</p>
+        <h1>Make your next<br><span>move count.</span></h1>
+        <p class="hero-description">A clearer view of your placement potential starts with the strengths you already
+            have.</p>
+        <div class="hero-actions">
+            {% if request.session.student_id %}
+            <a class="button button-dark" href="{% url 'predict' %}">Check my placement <span
+                    aria-hidden="true">↗</span></a>
+            {% else %}
+            <a class="button button-dark" href="{% url 'register' %}">Get started <span aria-hidden="true">↗</span></a>
+            <a class="button button-quiet" href="{% url 'login' %}">I have an account</a>
+            {% endif %}
+        </div>
+        <div class="hero-note"><span class="note-rule"></span> A data-informed starting point for your journey.</div>
+    </div>
+
+    <div class="hero-art" aria-label="Illustration of a placement score chart" role="img">
+        <div class="art-topline"><span>PLACEMENT OUTLOOK</span><span class="art-live"><i></i> READY</span></div>
+        <div class="art-number">01<span> / 04</span></div>
+        <div class="chart-wrap">
+            <div class="chart-y-labels"><span>HIGH</span><span>MID</span><span>LOW</span></div>
+            <div class="chart">
+                <div class="chart-grid"><i></i><i></i><i></i></div>
+                <svg viewBox="0 0 360 160" preserveAspectRatio="none" aria-hidden="true">
+                    <path class="chart-area"
+                        d="M0 132 C35 120 42 82 82 94 S135 119 170 67 S228 88 258 45 S320 54 360 14 L360 160 L0 160 Z">
+                    </path>
+                    <path class="chart-line"
+                        d="M0 132 C35 120 42 82 82 94 S135 119 170 67 S228 88 258 45 S320 54 360 14"></path>
+                    <circle cx="360" cy="14" r="5"></circle>
+                </svg>
+            </div>
+        </div>
+        <div class="chart-x-labels"><span>PROFILE</span><span>ACADEMICS</span><span>APTITUDE</span></div>
+        <div class="art-bottom"><span>YOUR POTENTIAL, MAPPED</span><span>↗</span></div>
+        <div class="art-stamp">NS<br><span>CAREER<br>LAB</span></div>
+    </div>
+</section>
+
+<section class="steps-band" aria-label="How it works">
+    <div class="steps-heading"><span>THE PROCESS</span><span>01 — 03</span></div>
+    <div class="steps-grid">
+        <article class="step-item"><span class="step-no">01</span>
+            <div>
+                <h2>Create your profile</h2>
+                <p>Register with your student details.</p>
+            </div><span class="step-arrow">↗</span>
+        </article>
+        <article class="step-item"><span class="step-no">02</span>
+            <div>
+                <h2>Share your scores</h2>
+                <p>Add your CGPA, IQ and profile score.</p>
+            </div><span class="step-arrow">↗</span>
+        </article>
+        <article class="step-item"><span class="step-no">03</span>
+            <div>
+                <h2>See your outlook</h2>
+                <p>Get a placement prediction in seconds.</p>
+            </div><span class="step-arrow">↗</span>
+        </article>
+    </div>
+</section>
+{% endblock %}

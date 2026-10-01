@@ -1,0 +1,276 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create your account</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #19352f;
+            --muted: #647771;
+            --paper: #f5f6ef;
+            --surface: #fffefa;
+            --green: #176b52;
+            --green-dark: #10513e;
+            --line: #dce4dc;
+            --error: #a32f38;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            grid-template-columns: minmax(280px, 0.9fr) minmax(420px, 1.1fr);
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .welcome {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: clamp(32px, 6vw, 82px);
+            color: #f8f7ec;
+            background-color: #1d5948;
+            background-image: radial-gradient(ellipse at 20% 78%, #347b5c 0, transparent 44%),
+                linear-gradient(145deg, #1d5948 8%, #173f39 92%);
+        }
+
+        .brand {
+            font: 700 15px/1.2 "Trebuchet MS", sans-serif;
+            letter-spacing: 0;
+        }
+
+        .welcome-copy {
+            max-width: 440px;
+            animation: arrive .55s ease-out both;
+        }
+
+        .welcome h1 {
+            margin: 0 0 18px;
+            font-size: clamp(38px, 5vw, 66px);
+            font-weight: 400;
+            line-height: 1.03;
+        }
+
+        .welcome p {
+            max-width: 360px;
+            margin: 0;
+            color: #d0e1d7;
+            font: 16px/1.7 "Trebuchet MS", sans-serif;
+        }
+
+        .welcome small {
+            color: #c4d8cd;
+            font: 12px "Trebuchet MS", sans-serif;
+        }
+
+        .form-side {
+            display: grid;
+            place-items: center;
+            padding: 40px 24px;
+        }
+
+        .form-wrap {
+            width: min(100%, 440px);
+            animation: arrive .55s .08s ease-out both;
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: var(--green);
+            font: 700 12px "Trebuchet MS", sans-serif;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 34px;
+            font-weight: 400;
+        }
+
+        .intro {
+            margin: 10px 0 28px;
+            color: var(--muted);
+            font: 14px/1.6 "Trebuchet MS", sans-serif;
+        }
+
+        .field {
+            margin: 0 0 17px;
+        }
+
+        label {
+            display: block;
+            margin: 0 0 7px;
+            font: 600 13px "Trebuchet MS", sans-serif;
+        }
+
+        input {
+            width: 100%;
+            min-height: 46px;
+            padding: 11px 13px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            background: var(--surface);
+            color: var(--ink);
+            font: 15px "Trebuchet MS", sans-serif;
+        }
+
+        input:focus {
+            outline: 2px solid #85bda1;
+            outline-offset: 1px;
+            border-color: var(--green);
+        }
+
+        .help,
+        .errorlist {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font: 12px/1.5 "Trebuchet MS", sans-serif;
+        }
+
+        .errorlist {
+            padding: 0;
+            color: var(--error);
+            list-style: none;
+        }
+
+        .alert {
+            margin: 0 0 18px;
+            padding: 11px 13px;
+            border-left: 3px solid var(--error);
+            background: #fff0ee;
+            color: var(--error);
+            font: 13px/1.5 "Trebuchet MS", sans-serif;
+        }
+
+        .submit {
+            width: 100%;
+            min-height: 48px;
+            margin-top: 4px;
+            border: 0;
+            border-radius: 4px;
+            background: var(--green);
+            color: white;
+            cursor: pointer;
+            font: 700 14px "Trebuchet MS", sans-serif;
+            transition: background .16s ease, transform .16s ease;
+        }
+
+        .submit:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
+        }
+
+        .signin {
+            margin: 22px 0 0;
+            text-align: center;
+            color: var(--muted);
+            font: 13px "Trebuchet MS", sans-serif;
+        }
+
+        .signin a {
+            color: var(--green);
+            font-weight: 700;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+
+        @keyframes arrive {
+            from {
+                opacity: 0;
+                transform: translateY(9px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 760px) {
+            body {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome {
+                min-height: 210px;
+                padding: 25px 26px;
+            }
+
+            .welcome-copy {
+                margin: 35px 0 22px;
+            }
+
+            .welcome h1 {
+                font-size: 40px;
+            }
+
+            .welcome p {
+                font-size: 14px;
+            }
+
+            .welcome small {
+                display: none;
+            }
+
+            .form-side {
+                padding: 34px 24px 42px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="welcome">
+        <div class="brand">DAY EIGHT</div>
+        <div class="welcome-copy">
+            <h1>A good place to begin.</h1>
+            <p>Create your account and pick up right where your next chapter starts.</p>
+        </div>
+        <small>Make yourself at home.</small>
+    </aside>
+    <main class="form-side">
+        <section class="form-wrap" aria-labelledby="form-title">
+            <p class="eyebrow">Join us</p>
+            <h2 id="form-title">Create account</h2>
+            <p class="intro">Choose a username, add your name and set a password.</p>
+            <form method="post" action="{% url 'sign_up' %}" novalidate>
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                <div class="alert" role="alert">{{ form.non_field_errors }}</div>
+                {% endif %}
+                {% for field in form %}
+                <div class="field">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}<div class="help">{{ field.help_text }}</div>{% endif %}
+                    {% for error in field.errors %}<p class="errorlist" role="alert">{{ error }}</p>{% endfor %}
+                </div>
+                {% endfor %}
+                <button class="submit" type="submit">Create your account</button>
+            </form>
+            <p class="signin">Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+        </section>
+    </main>
+</body>
+
+</html>

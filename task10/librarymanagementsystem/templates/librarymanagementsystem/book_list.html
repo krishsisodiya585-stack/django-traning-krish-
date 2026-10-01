@@ -1,0 +1,45 @@
+{% extends 'librarymanagementsystem/base.html' %}
+{% block title %}Issued books · Northstar Library{% endblock %}
+{% block content %}
+<section class="page-heading">
+    <div><a class="back-link" href="{% url 'dashboard' %}">← Dashboard</a>
+        <p class="eyebrow">DATABASE RECORDS</p>
+        <h1>Issued books</h1>
+        <p class="muted">Live records saved by your account.</p>
+    </div>
+    <a class="button button-primary" href="{% url 'issue_book' %}"><span aria-hidden="true">+</span> Issue a book</a>
+</section>
+{% if issues %}
+<div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Book name</th>
+                <th>Book number</th>
+                <th>Student</th>
+                <th>Issue date</th>
+                <th>Due date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for issue in issues %}<tr>
+                <td>{{ issue.book_id }}</td>
+                <td><strong>{{ issue.book_name }}</strong></td>
+                <td>{{ issue.book_number }}</td>
+                <td>{{ issue.student_name }}</td>
+                <td>{{ issue.issue_date|date:'Y-m-d' }}</td>
+                <td>{{ issue.due_date|date:'Y-m-d' }}</td>
+            </tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <p class="empty-icon" aria-hidden="true">⌕</p>
+    <h2>No issue records found</h2>
+    <p class="muted">Once you issue a book, it will appear here from the database.</p><a class="button button-primary"
+        href="{% url 'issue_book' %}">Issue a book</a>
+</div>
+{% endif %}
+{% endblock %}

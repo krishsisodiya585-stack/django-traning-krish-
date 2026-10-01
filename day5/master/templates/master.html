@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'mycss.css' %}">
+</head>
+
+<body>
+    <h1 style="color: aquamarine;  ">
+
+        sagar group of institude</h1>
+    <div>
+        <img src="{% static 'sistec.jpg' %}" alt="sagar group of intitude" style="width:100%; height:auto;">
+    </div>
+    {% block content %}
+    {% endblock %}
+    <div>
+        <h1>krish sisodiya</h1>
+    </div>
+</body>
+
+</html>

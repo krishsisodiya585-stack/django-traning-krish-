@@ -1,0 +1,36 @@
+{% extends 'testing/base.html' %}
+{% block title %}{{ quiz.title }} | Checkmate{% endblock %}
+{% block content %}
+<div class="quiz-topline"><a class="text-link" href="{% url 'dashboard' %}">← Back to tests</a><span>TEST / {{
+        quiz.pk|stringformat:'02d' }}</span></div>
+<section class="quiz-heading">
+    <p class="eyebrow">TAKE YOUR TIME</p>
+    <h1>{{ quiz.title }}</h1>
+    <p>{{ quiz.description }}</p>
+    <div class="quiz-meta"><span>{{ questions|length }} question{{ questions|pluralize }}</span><span>·</span><span>One
+            point value shown per question</span></div>
+</section>
+<form method="post" class="quiz-form">
+    {% csrf_token %}
+    {% for question in questions %}
+    <fieldset class="question-block">
+        <legend><span class="question-number">{% if forloop.counter < 10 %}0{% endif %}{{ forloop.counter }}</span>
+                    <span>{{ question.text }}</span></legend>
+        <p class="question-points">{{ question.points }} point{{ question.points|pluralize }}</p>
+        <div class="choice-list">
+            {% for choice in question.choices.all %}
+            <label class="choice-option">
+                <input type="radio" name="question_{{ question.pk }}" value="{{ choice.pk }}">
+                <span class="choice-letter">{{ forloop.counter }}</span>
+                <span>{{ choice.text }}</span>
+            </label>
+            {% endfor %}
+        </div>
+    </fieldset>
+    {% endfor %}
+    <div class="submit-bar">
+        <p>Your score is calculated when you submit.</p><button class="button button-primary" type="submit">Submit test
+            <span aria-hidden="true">→</span></button>
+    </div>
+</form>
+{% endblock %}

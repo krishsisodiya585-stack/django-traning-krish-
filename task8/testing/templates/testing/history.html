@@ -1,0 +1,49 @@
+{% extends 'testing/base.html' %}
+{% block title %}Test history | Checkmate{% endblock %}
+{% block content %}
+<section class="dashboard-heading">
+    <div>
+        <p class="eyebrow">YOUR PROGRESS</p>
+        <h1>Test <em>history.</em></h1>
+        <p class="panel-note">Every completed attempt, all in one place.</p>
+    </div>
+    <a class="text-link" href="{% url 'dashboard' %}">← Back to tests</a>
+</section>
+<section class="section-block history-section">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">COMPLETED ATTEMPTS</p>
+            <h2>Recent results</h2>
+        </div><span class="section-count">{{ attempts|length }} TOTAL</span>
+    </div>
+    {% if attempts %}
+    <div class="history-table-wrap">
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Test</th>
+                    <th>Date completed</th>
+                    <th>Correct</th>
+                    <th>Score</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for attempt in attempts %}<tr>
+                    <td class="history-title">{{ attempt.quiz.title }}</td>
+                    <td>{{ attempt.submitted_at|date:'M j, Y · H:i' }}</td>
+                    <td>{{ attempt.correct_answers }} / {{ attempt.question_count }}</td>
+                    <td><span class="score-pill">{{ attempt.earned_points }} / {{ attempt.total_points }}</span></td>
+                    <td><a class="table-link" href="{% url 'result' attempt.pk %}">Review <span
+                                aria-hidden="true">↗</span></a></td>
+                </tr>{% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}<div class="empty-state"><span class="empty-mark">01</span>
+        <h3>Your history starts here</h3>
+        <p>Complete a test and your results will be saved here.</p><a class="button button-outline"
+            href="{% url 'dashboard' %}">Browse tests <span aria-hidden="true">→</span></a>
+    </div>{% endif %}
+</section>
+{% endblock %}

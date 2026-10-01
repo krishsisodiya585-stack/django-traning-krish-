@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>voting</title>
+</head>
+<body>
+    <div><h1>Voting Page</h1></div>
+    {%% if age >= 18 %}
+      <div>  <p>You are eligible to vote.</p>
+    {% else %}
+        <p>You are not eligible to vote.</p>
+    {% endif %}
+</body>
+</html>

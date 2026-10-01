@@ -1,0 +1,59 @@
+{% extends 'testing/base.html' %}
+{% block title %}Available tests | Checkmate{% endblock %}
+{% block content %}
+<section class="dashboard-heading">
+    <div>
+        <p class="eyebrow">STUDENT DASHBOARD</p>
+        <h1>Good to see you, <em>{{ request.user.first_name|default:request.user.username }}.</em></h1>
+        <p class="panel-note">Choose a test and take it at your own pace.</p>
+    </div>
+    <a class="text-link" href="{% url 'history' %}">View all results <span aria-hidden="true">↗</span></a>
+</section>
+<section class="stats-strip" aria-label="Your progress">
+    <div class="stat"><span class="stat-value">{{ quizzes|length }}</span><span class="stat-label">Tests
+            available</span></div>
+    <div class="stat"><span class="stat-value">{{ completed_total }}</span><span class="stat-label">Tests
+            completed</span></div>
+    <div class="stat stat-note"><span class="stat-label">A little practice adds up.</span><span
+            class="stat-decoration">✳</span></div>
+</section>
+<section class="section-block">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">YOUR LIBRARY</p>
+            <h2>Available tests</h2>
+        </div><span class="section-count">{{ quizzes|length }} TOTAL</span>
+    </div>
+    {% if quizzes %}
+    <div class="test-list">
+        {% for quiz in quizzes %}
+        <article class="test-row">
+            <div class="test-number">{% if forloop.counter < 10 %}0{% endif %}{{ forloop.counter }}</div>
+                    <div class="test-details">
+                        <h3>{{ quiz.title }}</h3>
+                        <p>{{ quiz.description|default:'A focused set of questions to test what you
+                            know.'|truncatewords:20 }}</p>
+                        <span class="test-meta">{{ quiz.question_total }} question{{ quiz.question_total|pluralize }}
+                            <span>·</span> Scored on submission</span>
+                    </div>
+                    <div class="test-action">
+                        {% if quiz.latest_attempt %}
+                        <span class="last-score">Last score <strong>{{ quiz.latest_attempt.earned_points }}/{{
+                                quiz.latest_attempt.total_points }}</strong></span>
+                        {% else %}
+                        <span class="last-score">Ready when you are</span>
+                        {% endif %}
+                        <a class="button button-outline" href="{% url 'take_quiz' quiz.pk %}">Start test <span
+                                aria-hidden="true">→</span></a>
+                    </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state"><span class="empty-mark">✳</span>
+        <h3>No tests published yet</h3>
+        <p>Your teacher's published tests will appear here.</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

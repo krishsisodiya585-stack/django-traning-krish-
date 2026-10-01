@@ -1,0 +1,124 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OIST</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .navbar {
+            background: #222;
+            padding: 18px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            color: #00bcd4;
+        }
+
+        .content {
+            background: white;
+            margin-top: 25px;
+            padding: 35px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .college-image {
+            width: 500px;
+            max-width: 90%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>OIST College</h1>
+
+
+        <div class="navbar">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'sistec' %}">
+                SISTec
+            </a>
+
+            <a href="{% url 'lnct' %}">
+                LNCT
+            </a>
+
+            <a href="{% url 'oist' %}">
+                OIST
+            </a>
+
+        </div>
+
+
+        <div class="content">
+
+            <h2>Oriental Institute of Science and Technology</h2>
+
+            <img src="{% static 'oist.jpeg' %}" alt="OIST College" class="college-image">
+
+            <p>
+                Oriental Institute of Science and Technology (OIST)
+                is an educational institute located in Bhopal,
+                Madhya Pradesh. The institute provides education
+                in engineering, technology and related fields.
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

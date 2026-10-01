@@ -1,0 +1,158 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Hub</title>
+
+    <link rel="stylesheet" href="{% static 'shopping.css' %}">
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <!-- Main Container -->
+    <main class="container">
+
+        <!-- Heading -->
+        <section class="hero">
+
+            <div class="icon">🛍️</div>
+
+            <h1>
+                Shopping <span>Hub</span>
+            </h1>
+
+            <p>
+                Your favourite shopping websites in one place
+            </p>
+
+            <div class="line"></div>
+
+        </section>
+
+
+        <!-- Shopping Cards -->
+        <section class="shopping-section">
+
+            <!-- Amazon -->
+            <div class="shop-card amazon">
+
+                <div class="card-image">
+                    <img src="{% static 'amazon.jpg' %}" alt="Amazon">
+                </div>
+
+                <h2>Amazon</h2>
+
+                <p>Shop everything you need</p>
+
+                <a href="https://www.amazon.in/"
+                   target="_blank"
+                   class="shop-btn">
+                    Visit Amazon
+                    <span>→</span>
+                </a>
+
+            </div>
+
+
+            <!-- Flipkart -->
+            <div class="shop-card flipkart">
+
+                <div class="card-image">
+                    <img src="{% static 'filpcart.jpg' %}" alt="Flipkart">
+                </div>
+
+                <h2>Flipkart</h2>
+
+                <p>Explore amazing deals</p>
+
+                <a href="https://www.flipkart.com/"
+                   target="_blank"
+                   class="shop-btn">
+                    Visit Flipkart
+                    <span>→</span>
+                </a>
+
+            </div>
+
+
+            <!-- Meesho -->
+            <div class="shop-card meesho">
+
+                <div class="card-image">
+                    <img src="{% static 'meesho.jpeg' %}" alt="Meesho">
+                </div>
+
+                <h2>Meesho</h2>
+
+                <p>Discover affordable products</p>
+
+                <a href="https://www.meesho.com/"
+                   target="_blank"
+                   class="shop-btn">
+                    Visit Meesho
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- Video Section -->
+        <section class="video-section">
+
+            <div class="video-title">
+                <span>🎬</span>
+
+                <div>
+                    <h2>Shopping Video</h2>
+                    <p>Enjoy our shopping experience</p>
+                </div>
+            </div>
+
+
+            <div class="video-container">
+
+                <video controls autoplay muted loop>
+                    <source src="{% static 'spapp.mp4' %}"
+                            type="video/mp4">
+
+                    Your browser does not support video.
+                </video>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer>
+
+            <p>
+                © 2026 Shopping Hub | Made with ❤️
+            </p>
+
+        </footer>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Northstar Library{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'librarymanagementsystem/style.css' %}">
+</head>
+
+<body>
+    <header class="topbar">
+        <a class="brand" href="{% url 'home' %}"><span class="brand-mark">N</span><span>Northstar
+                <small>LIBRARY</small></span></a>
+        {% if user.is_authenticated %}
+        <nav class="topnav">
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'book_list' %}">Issued books</a>
+            <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="nav-button" type="submit">Log
+                    out</button></form>
+        </nav>
+        {% endif %}
+    </header>
+    <main class="page-shell">
+        {% if messages %}
+        <div class="messages" aria-live="polite">
+            {% for message in messages %}<p class="message {{ message.tags }}">{{ message }}</p>{% endfor %}
+        </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">NORTHSTAR LIBRARY <span>·</span> A calmer way to keep every issue in view</footer>
+</body>
+
+</html>

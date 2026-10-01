@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Northstar Placement{% endblock %}</title>
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'placement/site.css' %}">
+</head>
+
+<body>
+    <header class="topbar">
+        <a class="brand" href="{% url 'home' %}" aria-label="Northstar Placement home">
+            <span class="brand-mark">N</span>
+            <span>northstar<span class="brand-light"> / placement</span></span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+            {% if request.session.student_id %}
+            <span class="nav-greeting">Hi, {{ request.session.student_name }}</span>
+            <a href="{% url 'predict' %}">Prediction</a>
+            <a class="nav-logout" href="{% url 'logout' %}">Log out</a>
+            {% else %}
+            <a href="{% url 'login' %}">Student login</a>
+            <a class="nav-cta" href="{% url 'register' %}">Create account <span aria-hidden="true">↗</span></a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% if messages %}
+        <div class="message-stack" role="status" aria-live="polite">
+            {% for message in messages %}
+            <div class="message message-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <span>Northstar Placement</span>
+        <span>Plan your next move.</span>
+    </footer>
+</body>
+
+</html>

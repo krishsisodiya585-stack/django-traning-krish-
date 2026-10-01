@@ -1,0 +1,23 @@
+{% extends 'testing/base.html' %}
+{% block title %}Log in | Checkmate{% endblock %}
+{% block content %}
+<section class="auth-page">
+    <p class="eyebrow">WELCOME BACK</p>
+    <h1>Log in to continue</h1>
+    <p class="panel-note">Pick up where you left off.</p>
+    <form method="post" class="form-stack">
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+        {% for field in form %}
+        <div class="form-field">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        </div>
+        {% endfor %}
+        <button class="button button-primary button-full" type="submit">Log in <span
+                aria-hidden="true">→</span></button>
+    </form>
+    <p class="switch-auth">New to Checkmate? <a href="{% url 'signup' %}">Create an account</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'testing/base.html' %}
+{% block title %}Log in | Checkmate{% endblock %}
+{% block content %}
+<section class="welcome-layout">
+    <div class="welcome-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> YOUR NEXT GOOD ANSWER STARTS HERE</p>
+        <h1>Make every<br>answer <em>count.</em></h1>
+        <p class="welcome-note">A calm place to practise, find your pace, and see how far you have come.</p>
+        <div class="welcome-index"><span>01</span><span>Practice on your terms</span><span class="index-rule"></span>
+        </div>
+    </div>
+    <div class="auth-panel">
+        <p class="eyebrow">WELCOME BACK</p>
+        <h2>Log in to continue</h2>
+        <p class="panel-note">Pick up where you left off.</p>
+        <form method="post" action="{% url 'login' %}" class="form-stack">
+            {% csrf_token %}
+            {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+            {% for field in form %}
+            <div class="form-field">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+            </div>
+            {% endfor %}
+            <button class="button button-primary button-full" type="submit">Log in to your account <span
+                    aria-hidden="true">→</span></button>
+        </form>
+        <p class="switch-auth">New to Checkmate? <a href="{% url 'signup' %}">Create an account</a></p>
+    </div>
+</section>
+{% endblock %}

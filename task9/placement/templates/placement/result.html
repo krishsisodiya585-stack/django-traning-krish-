@@ -1,0 +1,37 @@
+{% extends 'placement/base.html' %}
+{% block title %}Your Placement Outlook | Northstar{% endblock %}
+{% block content %}
+<section class="result-page">
+    <div class="result-topline"><span class="eyebrow"><span class="eyebrow-dot"></span> YOUR PLACEMENT
+            OUTLOOK</span><span class="result-date">NORTHSTAR / CAREER LAB</span></div>
+    <div class="result-content">
+        <div class="result-copy">
+            <p class="panel-kicker">PREDICTION COMPLETE</p>
+            {% if placed %}
+            <h1>Your profile is<br><span>placement-ready.</span></h1>
+            <p class="result-description">The model predicts a positive placement outcome based on the scores you
+                entered. Keep that momentum going.</p>
+            {% else %}
+            <h1>Every strong profile<br><span>starts somewhere.</span></h1>
+            <p class="result-description">The model predicts that more preparation may help. Treat this as a starting
+                point and keep strengthening your profile.</p>
+            {% endif %}
+            <div class="result-actions"><a class="button button-dark" href="{% url 'predict' %}">Try another prediction
+                    <span aria-hidden="true">↗</span></a><a class="text-link" href="{% url 'home' %}">Back to home</a>
+            </div>
+        </div>
+        <aside class="result-card {% if placed %}result-positive{% else %}result-growth{% endif %}">
+            <div class="result-card-head"><span>MODEL OUTLOOK</span><span>NS / 01</span></div>
+            <div class="result-mark">{% if placed %}YES{% else %}BUILD{% endif %}</div>
+            <div class="result-verdict">{% if placed %}Positive outlook{% else %}Growth opportunity{% endif %}</div>
+            <div class="result-divider"></div>
+            <p class="result-card-label">YOUR SUBMITTED SCORES</p>
+            <div class="score-summary"><span>CGPA</span><strong>{{ scores.cgpa|floatformat:2 }}</strong></div>
+            <div class="score-summary"><span>IQ</span><strong>{{ scores.iq|floatformat:0 }}</strong></div>
+            <div class="score-summary"><span>PROFILE SCORE</span><strong>{{ scores.profile_score|floatformat:1
+                    }}</strong></div>
+            <p class="result-disclaimer">A model prediction, not a guarantee of employment.</p>
+        </aside>
+    </div>
+</section>
+{% endblock %}

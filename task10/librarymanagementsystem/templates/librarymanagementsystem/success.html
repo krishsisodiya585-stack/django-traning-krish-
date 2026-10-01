@@ -1,0 +1,30 @@
+{% extends 'librarymanagementsystem/base.html' %}
+{% block title %}Issue saved · Northstar Library{% endblock %}
+{% block content %}
+<section class="success-panel">
+    <div class="success-mark" aria-hidden="true">✓</div>
+    <p class="eyebrow">RECORD SAVED</p>
+    <h1>Book issued successfully.</h1>
+    <p class="muted">The issue details are now in your library database.</p>
+    <dl class="detail-list">
+        <div>
+            <dt>Book</dt>
+            <dd>{{ issue.book_name }}</dd>
+        </div>
+        <div>
+            <dt>Student</dt>
+            <dd>{{ issue.student_name }}</dd>
+        </div>
+        <div>
+            <dt>Issue date</dt>
+            <dd>{{ issue.issue_date|date:'M j, Y' }}</dd>
+        </div>
+        <div>
+            <dt>Due date</dt>
+            <dd>{{ issue.due_date|date:'M j, Y' }}</dd>
+        </div>
+    </dl>
+    <div class="actions"><a class="button button-primary" href="{% url 'dashboard' %}">Back to dashboard</a><a
+            class="button button-outline" href="{% url 'book_list' %}">View issued books</a></div>
+</section>
+{% endblock %}

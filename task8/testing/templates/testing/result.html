@@ -1,0 +1,52 @@
+{% extends 'testing/base.html' %}
+{% block title %}Test result | Checkmate{% endblock %}
+{% block content %}
+<div class="quiz-topline"><a class="text-link" href="{% url 'dashboard' %}">← Dashboard</a><a class="text-link"
+        href="{% url 'history' %}">Test history ↗</a></div>
+<section class="result-heading">
+    <p class="eyebrow">TEST COMPLETE</p>
+    <h1>{{ attempt.quiz.title }}</h1>
+    <p>Submitted {{ attempt.submitted_at|date:'F j, Y · H:i' }}</p>
+</section>
+<section class="result-summary">
+    <div class="score-block"><span class="score-label">YOUR SCORE</span><strong>{{ attempt.earned_points }}<span> / {{
+                attempt.total_points }}</span></strong><span class="score-caption">points earned</span></div>
+    <div class="result-stats">
+        <div><strong>{{ attempt.question_count }}</strong><span>Questions</span></div>
+        <div><strong>{{ attempt.correct_answers }}</strong><span>Correct</span></div>
+        <div><strong>{{ incorrect_count }}</strong><span>Review</span></div>
+    </div>
+    <span class="result-stamp" aria-hidden="true">✓</span>
+</section>
+<section class="section-block answer-review">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">ANSWER REVIEW</p>
+            <h2>See what you got</h2>
+        </div>
+    </div>
+    {% for answer in answers %}
+    <article class="review-row {% if answer.is_correct %}review-correct{% else %}review-incorrect{% endif %}">
+        <div class="review-status">
+            {% if answer.is_correct %}✓{% else %}×{% endif %}
+        </div>
+        <div class="review-content">
+            <h3>{{ answer.question.text }}</h3>
+            {% if answer.selected_choice %}
+            <p>Your answer: {{ answer.selected_choice.text }}</p>
+            {% else %}
+            <p>Your answer: No answer selected</p>
+            {% endif %}
+            {% if not answer.is_correct %}
+            <p class="correct-answer">Correct answer:
+                {{ answer.correct_answer_text }}
+            </p>
+            {% endif %}
+        </div>
+        <span class="review-points">{{ answer.points_awarded }} / {{ answer.points_possible }} pts</span>
+    </article>
+    {% empty %}
+    <p class="empty-note">No answer details were saved for this test.</p>
+    {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'placement/base.html' %}
+{% block title %}Student Login | Northstar{% endblock %}
+{% block content %}
+<section class="form-page login-page">
+    <div class="form-aside aside-login">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> GOOD TO HAVE YOU BACK</p>
+        <h1>Pick up where<br>your potential begins.</h1>
+        <p>Sign in to continue to your placement prediction.</p>
+        <div class="login-orbit" aria-hidden="true"><span>NS</span><i></i><i></i><i></i></div>
+    </div>
+    <div class="form-panel">
+        <div class="panel-heading"><span class="panel-kicker">WELCOME BACK</span><span class="panel-count">02 /
+                02</span></div>
+        <h2>Student login</h2>
+        <p class="panel-intro">Use the name and password from your registration.</p>
+        <form method="post" class="form-fields">
+            {% csrf_token %}
+            <label>Student name<input name="name" type="text" placeholder="Your registered name" autocomplete="username"
+                    required></label>
+            <label>Password<input name="password" type="password" placeholder="Your password"
+                    autocomplete="current-password" required></label>
+            <button class="button button-dark button-full" type="submit">Log in <span
+                    aria-hidden="true">↗</span></button>
+        </form>
+        <p class="form-switch">New to Northstar? <a href="{% url 'register' %}">Register first</a></p>
+    </div>
+</section>
+{% endblock %}

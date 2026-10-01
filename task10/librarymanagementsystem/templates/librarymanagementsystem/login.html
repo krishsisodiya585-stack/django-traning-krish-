@@ -1,0 +1,17 @@
+{% extends 'librarymanagementsystem/base.html' %}
+{% block title %}Log in · Northstar Library{% endblock %}
+{% block content %}
+<section class="form-panel">
+    <p class="eyebrow">WELCOME BACK</p>
+    <h1>Log in</h1>
+    <p class="muted">Continue managing your library records.</p>
+    <form method="post" class="data-form">{% csrf_token %}
+        <label for="username">Username</label><input id="username" name="username" type="text" autocomplete="username"
+            required>
+        <label for="password">Password</label><input id="password" name="password" type="password"
+            autocomplete="current-password" required>
+        <button class="button button-primary button-wide" type="submit">Log in</button>
+    </form>
+    <p class="form-foot">New here? <a href="{% url 'signup' %}">Create an account</a></p>
+</section>
+{% endblock %}

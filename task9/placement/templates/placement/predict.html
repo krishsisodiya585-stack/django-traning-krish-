@@ -1,0 +1,36 @@
+{% extends 'placement/base.html' %}
+{% block title %}Placement Prediction | Northstar{% endblock %}
+{% block content %}
+<section class="prediction-page">
+    <div class="prediction-heading">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> PLACEMENT OUTLOOK</p>
+        <h1>Put your strengths<br><span>into perspective.</span></h1>
+        <p>Enter your latest scores. Your prediction is based on your CGPA, IQ and profile score.</p>
+    </div>
+    <div class="prediction-layout">
+        <form method="post" class="score-form">
+            {% csrf_token %}
+            <div class="score-form-top"><span>YOUR SCORES</span><span>01 — 03</span></div>
+            <label class="score-field"><span class="score-index">01</span><span class="score-label">CGPA<small>Scale of
+                        0 to 10</small></span><input name="cgpa" type="number" min="0" max="10" step="0.01"
+                    placeholder="8.25" required></label>
+            <label class="score-field"><span class="score-index">02</span><span class="score-label">IQ score<small>Enter
+                        a score from 0 to 200</small></span><input name="iq" type="number" min="0" max="200" step="1"
+                    placeholder="112" required></label>
+            <label class="score-field"><span class="score-index">03</span><span class="score-label">Profile
+                    score<small>Scale of 0 to 100</small></span><input name="profile_score" type="number" min="0"
+                    max="100" step="0.1" placeholder="78" required></label>
+            <button class="button button-dark button-full" type="submit">Get my prediction <span
+                    aria-hidden="true">↗</span></button>
+        </form>
+        <aside class="prediction-note">
+            <span class="note-symbol">✳</span>
+            <p class="note-label">A NOTE ON YOUR RESULT</p>
+            <h2>A useful signal.<br>Not the whole story.</h2>
+            <p>Your result is a prediction from a machine-learning model, not a guarantee. Keep building your skills and
+                experience.</p>
+            <div class="note-foot"><span>MODEL INPUT</span><span>CGPA · IQ · PROFILE</span></div>
+        </aside>
+    </div>
+</section>
+{% endblock %}

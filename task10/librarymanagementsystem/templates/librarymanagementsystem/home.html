@@ -1,0 +1,20 @@
+{% extends 'librarymanagementsystem/base.html' %}
+{% block title %}Welcome · Northstar Library{% endblock %}
+{% block content %}
+<section class="welcome-layout">
+    <div class="welcome-copy">
+        <p class="eyebrow">A PLACE FOR EVERY STORY</p>
+        <h1>Library management,<br><em>made clear.</em></h1>
+        <p class="lede">Keep book issues, student names and due dates together in one simple workspace.</p>
+        <div class="actions">
+            <a class="button button-primary" href="{% url 'signup' %}">Create an account</a>
+            <a class="button button-outline" href="{% url 'login' %}">Log in</a>
+        </div>
+    </div>
+    <aside class="welcome-note">
+        <div class="book-stack" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="eyebrow">YOUR LIBRARY, IN ORDER</p>
+        <p>Issue a book, confirm the record, and find it again whenever you need it.</p>
+    </aside>
+</section>
+{% endblock %}
